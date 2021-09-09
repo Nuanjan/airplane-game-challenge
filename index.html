@@ -7,11 +7,16 @@
 
 <body>
     <style type="text/css">
-        #ocean {
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        #galaxy {
             background-image: url("dark-galaxy.jpg");
             background-size: cover;
-            width: 900px;
-            height: 700px;
+            width: 100%;
+            height: 100vh;
         }
         
         .player {
@@ -28,34 +33,34 @@
             height: 75px;
         }
     </style>
-    <div id="ocean">
+    <div id="galaxy">
         <div id="players"></div>
         <div id="enemies"></div>
     </div>
     <script type="text/javascript">
         var player = {
-            left: 450,
-            top: 620
+            left: 50,
+            top: 80
         }
         var enemies = [{
-                left: 350,
-                top: 200
+                left: 20,
+                top: 10
             }, {
-                left: 450,
-                top: 250
+                left: 40,
+                top: 15
             }, {
-                left: 550,
-                top: 250
+                left: 60,
+                top: 15
             }, {
-                left: 650,
-                top: 200
+                left: 80,
+                top: 10
             }
 
         ]
 
         function drawPlayer() {
             content = "";
-            content = "<div class='player' style='left:" + player.left + "px; top: " + player.top + "px'></div> "
+            content = "<div class='player' style='left:" + player.left + "%; top: " + player.top + "vh'></div> "
             document.getElementById("players").innerHTML = content;
 
         }
@@ -65,23 +70,23 @@
         function drawEnemies() {
             content = "";
             for (var idx = 0; idx < enemies.length; idx++) {
-                content += "<div class='enemy' style='left:" + enemies[idx].left + "px; top: " + enemies[idx].top + "px'></div> "
+                content += "<div class='enemy' style='left:" + enemies[idx].left + "%; top: " + enemies[idx].top + "vh'></div> "
             }
             document.getElementById("enemies").innerHTML = content;
         }
         drawEnemies();
         document.onkeydown = function(e) {
-            if (e.keyCode === 37) { //left
-                player.left = player.left - 10;
+            if (e.keyCode === 37 && player.left !== 10) { //left
+                player.left = player.left - 3;
             }
             if (e.keyCode === 39) { //right
-                player.left = player.left + 10;
+                player.left = player.left + 3;
             }
             if (e.keyCode === 38) { //top
-                player.top = player.top - 10;
+                player.top = player.top - 3;
             }
             if (e.keyCode === 40) { // down
-                player.top = player.top + 10;
+                player.top = player.top + 3;
             }
             drawPlayer();
         }
